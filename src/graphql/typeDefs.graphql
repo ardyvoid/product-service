@@ -1,0 +1,17 @@
+type Product @key(fields: "id") {
+  id: ID!
+  variants: [ProductVariant]
+  title: String!
+  description: String
+  image: String
+}
+
+type ProductVariant @key(fields: "id") {
+  id: ID!
+  price: Float!
+  sku: String
+}
+
+type Query {
+  findProduct(id: ID!): Product
+}

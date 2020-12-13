@@ -1,0 +1,15 @@
+FROM node:14.15
+
+# Define required production defaults so the container can run without having to have these defined again
+ENV NODE_ENV=production
+ENV PORT=8878
+
+EXPOSE $PORT
+
+COPY . ./app
+COPY ./.docker/start.sh /usr/local/bin/
+
+RUN npm --prefix /app install --production=false --no-audit; \
+    chmod +x /usr/local/bin/start.sh
+
+ENTRYPOINT ["/usr/local/bin/start.sh"]
